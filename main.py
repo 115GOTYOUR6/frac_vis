@@ -1,20 +1,21 @@
+# Author: Jay Oliver
+# Date Created: 13/05/2022
+# Date Last Modified: 14/05/2022
+# Purpose: Visualisation of fractions
+# Comments:
+
+import argparse
 import matplotlib.pyplot as plt
 from fractions import Fraction
-import argparse
 
-
-def plot_colors(frac, col='k'):
-    """
-    Generate a list of characters representing colors.
-    """
-    return [col if i < frac.numerator else 'w'
-            for i in range(frac.denominator)]
+import frac_vis
 
 
 parser = argparse.ArgumentParser(description="Provide a visual representation"
                                  " of the proper fractions passed on the"
                                  " command line.")
-parser.add_argument('fraction', type=str,)
+parser.add_argument('fraction', type=str,
+                    help="The fraction to create a visual for. Eg: '3/4'.")
 
 parser.add_argument('-color', type=str, default='b',
                     help="The color the segments representing the fractions"
@@ -23,10 +24,6 @@ parser.add_argument('-color', type=str, default='b',
 args = parser.parse_args()
 
 frac = Fraction(args.fraction, _normalize=False)
-cols = plot_colors(frac, col=args.color)
 
-
-plt.figure()
-plt.pie([1 for i in range(frac.denominator)], colors=cols,
-        wedgeprops={"edgecolor": 'k'})
+fig = frac_vis.pie_plot(frac, args.color)
 plt.show()
