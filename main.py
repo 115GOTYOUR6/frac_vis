@@ -8,7 +8,7 @@ import argparse
 import matplotlib.pyplot as plt
 from fractions import Fraction
 
-import frac_vis
+import frac_plot
 
 
 parser = argparse.ArgumentParser(description="Provide a visual representation"
@@ -25,5 +25,5 @@ args = parser.parse_args()
 
 frac = Fraction(args.fraction, _normalize=False)
 
-fig = frac_vis.pie_plot(frac, args.color)
+fig = frac_plot.pie_plot(frac, args.color)
 plt.show()
